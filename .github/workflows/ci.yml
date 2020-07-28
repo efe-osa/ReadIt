@@ -1,0 +1,49 @@
+name: CI
+on: [push]
+jobs:
+  reviewDeployDraft:
+    strategy:
+      runs-on: ${{ matrix.platform }}
+      matrix:
+        node-version: [10.x]
+        os: [ubuntu-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Nodejs
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.platform }}
+
+      - name: Install packages
+        run: yarn install
+
+      - name: Lint and typecheck
+        run: |
+          yarn lint 
+          yarn tsc
+          yarn test
+
+        env:
+          CI: true
+
+  releaseToProduction:
+    name: Publish to Netlify
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v1
+
+      - name: Build project
+        run: yarn build
+
+      - name: Deploy production to Netlify
+        uses: South-Paw/action-netlify-deploy@v1.0.4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          netlify-site-id: ${{ secrets.NETLIFY_SITE_ID }}
+          build-dir: './build'
+          comment-on-commit: true
