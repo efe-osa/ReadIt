@@ -6,7 +6,7 @@ import './App.css';
 
 function App(): JSX.Element {
   useEffect(() => {
-    const validityTime = 1000 * 60 * 5;
+    const validityTime = 1000 * 60 * 2;
     localStorage.setItem('readItValidtyTime', validityTime.toString());
   }, []);
   return (

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import placeholder from '../../../assets/images/placeholder.jpg';
 import { Post } from '../../types';
 import { formatDate } from '../../utils';
@@ -35,19 +35,22 @@ export const SubRedditsTabs = ({
 
 const PostItem = ({ post }: { post: Post }) => {
   const { title, thumbnail, created, url, subreddit } = post;
+  const [err, setErr] = useState(false);
+
   return (
-    <li className="border border-gray-400 lg:border-gray-400 bg-white hover:shadow rounded-md flex mb-2">
+    <li className="border border-gray-400 lg:border-gray-400 bg-white hover:shadow-sm rounded-md flex mb-2">
       <picture className="mr-2 h-full object-cover overflow-hidden rounded rounded-tr-none rounded-br-none">
         <img
           width="150"
           height="150"
-          src={thumbnail || placeholder}
+          src={!thumbnail || err ? placeholder : thumbnail}
           alt={title}
+          onError={() => setErr(true)}
           style={{ backgroundImage: placeholder }}
         />
       </picture>
       <div className="text-left w-full py-2">
-        <h4 className="text-gray-900 hover:text-indigo-500 font-bold text-xl mb-2">
+        <h4 className="lg:text-gray-900 hover:text-indigo-500 font-semibold text-xl mb-2 lg:no-underline">
           <a href={url}>{title}</a>
         </h4>
         <div className="flex flex-col md:flex-row items-start px-2">
@@ -66,7 +69,12 @@ const PostItem = ({ post }: { post: Post }) => {
               </span>
             </span>
           </p>
-          <p className="text-gray-600 text-base ml-auto">{formatDate(created)}</p>
+          <p className="text-gray-600 text-base ml-auto grid">
+            {formatDate(created)}
+            <a href={url} className="underline">
+              Visit link
+            </a>
+          </p>
         </div>
       </div>
     </li>
