@@ -46,7 +46,7 @@ export function queryByName(data: any[], input: string): any[] {
     return data;
   }
   if (/\w+/i.test(input)) {
-    return data.filter((dataItem) => dataItem.title.includes(input));
+    return data.filter((dataItem) => dataItem.title.includes(input.toLowerCase()));
   }
   return [];
 }
