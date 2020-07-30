@@ -8,6 +8,7 @@
     "plugin:react/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
     "prettier/@typescript-eslint",
     "plugin:prettier/recommended"
   ],
@@ -27,21 +28,10 @@
         "extensions": ["tsx"]
       }
     ],
-    "import/no-extraneous-dependencies": 0,
-    "import/no-unresolved": 0,
-    "import/extensions": 0,
-    "react/jsx-props-no-spreading": 0,
-    "react/prop-types": 0,
-    "react/jsx-one-expression-per-line": 0,
-    "jsx-a11y/anchor-is-valid": "off",
-    "jsx-a11y/anchor-has-content": "off",
-    "import/prefer-default-export": "off",
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/ban-ts-ignore": "off",
     "@typescript-eslint/no-unused-vars": "error",
     "react-hooks/rules-of-hooks": 2,
-    "react-hooks/exhaustive-deps": 1
+    "react-hooks/exhaustive-deps": 1,
+    "no-restricted-globals": "off"
   },
   "settings": {
     "import/parsers": {
