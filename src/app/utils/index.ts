@@ -1,4 +1,7 @@
+import { Post } from 'app/types';
+
 interface Data {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
 export const Months = [
@@ -17,8 +20,9 @@ export const Months = [
 ];
 
 export function extractValues<T = Data>(keys: string[], obj: Data | Data[]): T[] {
-  let reducedArr = Object.values(obj).map((curr) => {
-    let normalised: T = {} as T;
+  const reducedArr = Object.values(obj).map((curr) => {
+    const normalised: T = {} as T;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore
     keys.forEach((key: string) => (normalised[key] = curr.data[key]));
     return normalised;
@@ -26,22 +30,22 @@ export function extractValues<T = Data>(keys: string[], obj: Data | Data[]): T[]
   return reducedArr;
 }
 
-export const formatDate = (date: string) => {
+export const formatDate = (date: string): string => {
   const currentYear = new Date(date).getFullYear();
   const currentMonth = new Date(date).getMonth();
   const currentDate = new Date(date).getDate();
   return `${currentDate}/${Months[currentMonth]}/${currentYear}`;
 };
 
-export function queryByUpDate(data: any[], input: number): any[] {
+export function queryByUpDate(data: Post[], input: number): Post[] {
   return data.filter((dataItem) => new Date(dataItem.created).getMonth() === input);
 }
 
-export function queryByUpVotes(data: any[], input: number): any[] {
+export function queryByUpVotes(data: Post[], input: number): Post[] {
   return data.filter((dataItem) => dataItem.ups < input);
 }
 
-export function queryByName(data: any[], input: string): any[] {
+export function queryByName(data: Post[], input: string): Post[] {
   if (input.length === 0) {
     return data;
   }

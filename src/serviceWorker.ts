@@ -1,8 +1,6 @@
 // This optional code is used to register a service worker.
 // register() is not called by default.
 
-import { IDBService } from 'initCache';
-
 // This lets the app load faster on subsequent visits in production, and gives
 // it offline capabilities. However, it also means that developers (and users)
 // will only see deployed updates on subsequent visits to a page, after all the
@@ -24,7 +22,7 @@ type Config = {
   onSuccess?: (registration: ServiceWorkerRegistration) => void;
   onUpdate?: (registration: ServiceWorkerRegistration) => void;
 };
-
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function register(config?: Config) {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
@@ -58,28 +56,6 @@ export function register(config?: Config) {
     });
   }
 }
-
-window.self.addEventListener('fetch', function (event) {
-  //@ts-ignore
-  if (/reddit.com/i.test(event.request.url)) {
-    const readItLastFetched = localStorage.getItem('lastFetched');
-    const posts = IDBService().then((db) => db.get('redditPosts'));
-    if (posts) {
-      //@ts-ignore
-      event.respondWith(posts);
-    } else if (readItLastFetched === null || Date.now() - Number(readItLastFetched)) {
-      const lastFetched = Date.now();
-      localStorage.setItem('readItLastFetched', lastFetched.toString());
-      //@ts-ignore
-      return event.respondWith(fetch(event.request.url));
-    }
-  }
-});
-
-window.self.addEventListener('install', function (e) {
-  const validityTime = 1000 * 60 * 3;
-  localStorage.setItem('readItValidty', validityTime.toString());
-});
 
 function registerValidSW(swUrl: string, config?: Config) {
   navigator.serviceWorker
@@ -153,6 +129,7 @@ function checkValidServiceWorker(swUrl: string, config?: Config) {
     });
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function unregister() {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.ready

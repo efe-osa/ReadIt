@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { makeFetchPosts, selectPosts } from '../components/Posts/posts.reducer';
 import { Post } from '../types';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default () => {
   const dispatch = useDispatch();
   const { data, error, loading } = useSelector(selectPosts);

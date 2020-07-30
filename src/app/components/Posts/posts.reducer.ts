@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 import { Post, PostResponse, PostState } from './../../types/index';
 import { extractValues } from '../../utils';
@@ -36,7 +36,8 @@ export const postSlice = createSlice({
 
 export const { fetchFailure, fetchPosts, fetchSuccess } = postSlice.actions;
 
-export const makeFetchPosts = () => async (dispatch: any) => {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const makeFetchPosts = () => async (dispatch: Dispatch) => {
   dispatch(fetchPosts);
   const readItLastFetched = Number(localStorage.getItem('readItLastFetched'));
   const validityPeriod = Number(localStorage.getItem('readItValidtyTime'));
@@ -68,6 +69,7 @@ export const makeFetchPosts = () => async (dispatch: any) => {
   }
 };
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const selectPosts = (state: RootState) => state.postsDB;
 
 export default postSlice.reducer;

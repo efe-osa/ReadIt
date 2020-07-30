@@ -5,7 +5,7 @@ import NoPosts from '../../components/NoPost';
 import { PostList, SubRedditsTabs } from '../../components/Posts/components';
 import usePosts from '../../hooks/usePosts';
 
-export default function Home() {
+export default function Home(): JSX.Element {
   const {
     isLoading,
     error,

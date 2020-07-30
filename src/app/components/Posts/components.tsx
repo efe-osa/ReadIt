@@ -11,7 +11,7 @@ export const SubRedditsTabs = ({
   subReddits: string[];
   selectSubReddit: (e: React.MouseEvent<HTMLButtonElement>) => void;
   selectedSubReddit: string;
-}) => {
+}): JSX.Element => {
   return (
     <nav className="focus:border-pink-200 focus:border bg-gray-100 p-3 mx-2 flex flex-column items-start overflow-y-scroll w-full md:w-64 md:flex-col md:align-start md:overflow-x-scroll md:h-screen">
       {['All', ...subReddits].map((sr, idx) => (
@@ -73,7 +73,7 @@ const PostItem = ({ post }: { post: Post }) => {
   );
 };
 
-export const PostList = (props: { data: Post[] }) => (
+export const PostList = (props: { data: Post[] }): JSX.Element => (
   <ol className="overflow-x-scroll h-screen m-4">
     {props.data.map((post) => (
       <Fragment key={post.id}>

@@ -4,7 +4,7 @@ import Posts from './app/pages/home';
 import './tailwind.output.css';
 import './App.css';
 
-function App() {
+function App(): JSX.Element {
   useEffect(() => {
     const validityTime = 1000 * 60 * 5;
     localStorage.setItem('readItValidtyTime', validityTime.toString());

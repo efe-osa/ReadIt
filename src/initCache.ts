@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { PostResponse } from 'app/types';
 import * as idb from 'idb';
 
@@ -16,8 +17,12 @@ async function initialiseCache() {
   return cacheDB;
 }
 
-export async function IDBService() {
-  let idbCache = await initialiseCache();
+export async function IDBService(): Promise<{
+  get: (key: string) => Promise<any>;
+  put: (key: string) => Promise<any>;
+  remove: (key: string) => Promise<void>;
+}> {
+  const idbCache = await initialiseCache();
 
   const get = (key: string) => {
     return idbCache.transaction(tableName, 'readonly').objectStore(tableName).get(key);
