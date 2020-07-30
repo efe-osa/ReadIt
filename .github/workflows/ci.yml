@@ -2,11 +2,7 @@ name: CI
 on: [push]
 jobs:
   reviewDeployDraft:
-    runs-on: ${{ matrix.platform }}
-    strategy:
-      matrix:
-        node-version: [10.x]
-        os: [ubuntu-latest]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
