@@ -39,12 +39,12 @@ export const { fetchFailure, fetchPosts, fetchSuccess } = postSlice.actions;
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const makeFetchPosts = () => async (dispatch: Dispatch) => {
   dispatch(fetchPosts);
-  const readItLastFetched = Number(localStorage.getItem('readItLastFetched'));
-  const validityPeriod = Number(localStorage.getItem('readItValidtyTime'));
+  const readItLastFetched = localStorage.getItem('readItLastFetched');
+  const validityPeriod = localStorage.getItem('readItValidtyTime');
   const idb = await IDBService();
   const posts = await idb.get('posts');
   const time = Date.now();
-  const isCacheValid = time <= readItLastFetched + validityPeriod;
+  const isCacheValid = time <= Number(readItLastFetched) + Number(validityPeriod);
 
   try {
     if (posts) {
