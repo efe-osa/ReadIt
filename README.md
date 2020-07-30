@@ -50,3 +50,6 @@ $ yarn serve
 ```bash
 $ yarn test
 ```
+
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5e1a6e74-ef61-41dc-ac8a-6758e5af578a/deploy-status)](https://app.netlify.com/sites/fervent-bhabha-e5febb/deploys)
