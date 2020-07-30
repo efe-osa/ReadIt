@@ -91,8 +91,13 @@ export default function Home() {
                 </button>
               ))}
             </h3>
-            {isLoading ? <Loader /> : <PostList data={posts} />}
-            {(posts.length === 0 || error) && <NoPosts />}
+            {isLoading ? (
+              <Loader />
+            ) : posts.length === 0 || error ? (
+              <NoPosts />
+            ) : (
+              <PostList data={posts} />
+            )}
           </article>
         </div>
       </section>
