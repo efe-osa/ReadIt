@@ -53,8 +53,7 @@ export const makeFetchPosts = () => async (dispatch: Dispatch) => {
 
     if (readItLastFetched === null || !isCacheValid) {
       localStorage.setItem('readItLastFetched', time.toString());
-      // const response = await fetch(process.env.REACT_APP_SERVER_URI as string);
-      const response = await fetch('https://www.reddit.com/.json');
+      const response = await fetch(process.env.REACT_APP_SERVER_URI as string);
       if (response.status === 200) {
         const results = await response.json();
         dispatch(fetchSuccess(results));
