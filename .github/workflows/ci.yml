@@ -2,8 +2,8 @@ name: CI
 on: [push]
 jobs:
   reviewDeployDraft:
+    runs-on: ${{ matrix.platform }}
     strategy:
-      runs-on: ${{ matrix.platform }}
       matrix:
         node-version: [10.x]
         os: [ubuntu-latest]
