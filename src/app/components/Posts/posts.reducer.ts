@@ -42,25 +42,29 @@ export const makeFetchPosts = () => async (dispatch: any) => {
   const validityPeriod = Number(localStorage.getItem('readItValidtyTime'));
   const idb = await IDBService();
   const posts = await idb.get('posts');
-  const time = Date.now()
-  const isCacheValid = time <= ( readItLastFetched + validityPeriod);
-  
+  const time = Date.now();
+  const isCacheValid = time <= readItLastFetched + validityPeriod;
+
   try {
     if (posts) {
       dispatch(fetchSuccess(posts));
-    } 
+    }
+
     if (readItLastFetched === null || !isCacheValid) {
       localStorage.setItem('readItLastFetched', time.toString());
       const response = await fetch(process.env.REACT_APP_SERVER_URI as string);
       if (response.status === 200) {
-        alert('works!')
         const results = await response.json();
         dispatch(fetchSuccess(results));
         idb.put(results);
       }
     }
   } catch (error) {
-    dispatch(fetchFailure(error));
+    if (error.includes('networkError')) {
+      posts && fetchSuccess(posts);
+    } else {
+      dispatch(fetchFailure(error));
+    }
   }
 };
 
