@@ -16,7 +16,7 @@ This application is a thread of reddit posts retreived from `Reddit` .
 ### Installation
 
 - Verify that `node` and `yarn` is installed on your local machine by running the command `node -v` and `yarn -v`
-- Clone the repository to the folder of choice using `git clone https://github.com/jessye95/ReadIt.git`
+- Clone the repository to the folder of choice using `git clone https://github.com/efe-osa/ReadIt.git`
 - In the project root directory install project dependencies using `yarn install`
 - To test the project works as expected, run `yarn start`
 - Open `http://localhost:3000` with on your browser to see the result.
