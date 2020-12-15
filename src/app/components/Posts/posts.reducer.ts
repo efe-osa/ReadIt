@@ -61,7 +61,7 @@ export const makeFetchPosts = () => async (dispatch: Dispatch) => {
       }
     }
   } catch (error) {
-    if (error.includes('networkError')) {
+    if (JSON.stringify(error).includes('networkError')) {
       posts && fetchSuccess(posts);
     } else {
       dispatch(fetchFailure(error));

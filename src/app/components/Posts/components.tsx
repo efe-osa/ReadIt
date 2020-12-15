@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import placeholder from '../../../assets/images/placeholder.jpg';
 import { Post } from '../../types';
 import { formatDate } from '../../utils';
@@ -39,18 +39,19 @@ const PostItem = ({ post }: { post: Post }) => {
 
   return (
     <li className="border border-gray-400 lg:border-gray-400 bg-white hover:shadow-sm rounded-md flex mb-2">
-      <picture className="mr-2 h-full object-cover overflow-hidden rounded rounded-tr-none rounded-br-none">
-        <img
-          width="150"
-          height="150"
-          src={!thumbnail || err ? placeholder : thumbnail}
-          alt={title}
-          onError={() => setErr(true)}
-          style={{ backgroundImage: placeholder }}
-        />
-      </picture>
-      <div className="text-left w-full py-2">
-        <h4 className="lg:text-gray-900 hover:text-indigo-500 font-semibold text-xl mb-2 lg:no-underline">
+      <div className="mr-2 overflow-hidden rounded rounded-tr-none rounded-br-none max-w-xxs">
+        <picture>
+          <img
+            className="object-cover object-center h-full"
+            src={!thumbnail || err ? placeholder : thumbnail}
+            alt={title}
+            onError={() => setErr(true)}
+            style={{ backgroundImage: placeholder }}
+          />
+        </picture>
+      </div>
+      <div className="text-left w-full p-2">
+        <h4 className="lg:text-gray-900 hover:text-indigo-500 font-semibold text-xl mb-2 lg:no-underline m">
           <a href={url}>{title}</a>
         </h4>
         <div className="flex flex-col md:flex-row items-start px-2">
@@ -84,9 +85,9 @@ const PostItem = ({ post }: { post: Post }) => {
 export const PostList = (props: { data: Post[] }): JSX.Element => (
   <ol className="overflow-x-scroll h-screen m-4">
     {props.data.map((post) => (
-      <Fragment key={post.id}>
+      <React.Fragment key={post.id}>
         <PostItem post={post} />
-      </Fragment>
+      </React.Fragment>
     ))}
   </ol>
 );
